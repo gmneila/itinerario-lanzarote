@@ -24,7 +24,7 @@
         }
         
         .header {
-            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
             color: white;
             padding: 30px;
             text-align: center;
@@ -33,7 +33,7 @@
         .header h1 {
             margin: 0;
             font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         
         .header p {
@@ -78,32 +78,13 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
         
-        .day-1 { background: #ff6b6b; }
-        .day-2 { background: #4ecdc4; }
-        .day-3 { background: #45b7d1; }
-        .day-4 { background: #96ceb4; }
-        .day-5 { background: #ffeaa7; color: #2d3436 !important; }
-        .day-6 { background: #a29bfe; }
-        
-        .legend {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9em;
-        }
-        
-        .legend-color {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-        }
+        /* Colores de los botones */
+        .day-1.active { background: #ff7675; }
+        .day-2.active { background: #74b9ff; }
+        .day-3.active { background: #fd79a8; }
+        .day-4.active { background: #55efc4; }
+        .day-5.active { background: #ffeaa7; color: #2d3436 !important; }
+        .day-6.active { background: #a29bfe; }
         
         #map {
             height: 600px;
@@ -113,7 +94,6 @@
         .info-panel {
             padding: 20px;
             background: #f8f9fa;
-            border-top: 1px solid #dee2e6;
         }
         
         .day-info {
@@ -137,9 +117,16 @@
         .day-info h3 {
             margin: 0 0 15px 0;
             color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            border-bottom: 2px solid;
             padding-bottom: 5px;
         }
+        
+        #info-1 h3 { border-color: #ff7675; }
+        #info-2 h3 { border-color: #74b9ff; }
+        #info-3 h3 { border-color: #fd79a8; }
+        #info-4 h3 { border-color: #55efc4; }
+        #info-5 h3 { border-color: #ffeaa7; }
+        #info-6 h3 { border-color: #a29bfe; }
         
         .location-list {
             list-style: none;
@@ -147,76 +134,35 @@
         }
         
         .location-list li {
-            padding: 8px 0;
+            padding: 10px 5px;
             border-bottom: 1px solid #eee;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-size: 1.05em;
         }
         
         .location-list li:last-child {
             border-bottom: none;
         }
         
-        .location-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        
-        @media (max-width: 768px) {
-            .day-buttons {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .legend {
-                flex-direction: column;
-                align-items: center;
-            }
-            #map {
-                height: 400px;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🏝️ BP y Llermo en Lanzarote ✨</h1>
-            <p>Itinerario de 6 días (3-8 Octubre) | Mapa Interactivo</p>
+            <p>3 al 8 de Octubre</p>
         </div>
         
         <div class="controls">
             <div class="day-buttons">
-                <button class="day-btn day-1" onclick="showDay(1)">Día 1 - Llegada</button>
-                <button class="day-btn day-2" onclick="showDay(2)">Día 2 - Sur</button>
-                <button class="day-btn day-3" onclick="showDay(3)">Día 3 - Timanfaya</button>
-                <button class="day-btn day-4" onclick="showDay(4)">Día 4 - Norte</button>
-                <button class="day-btn day-5" onclick="showDay(5)">Día 5 - Arte</button>
-                <button class="day-btn day-6" onclick="showDay(6)">Día 6 - Despedida</button>
-            </div>
-            
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #ff4444;"></div>
-                    <span>🏨 Alojamiento</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #4ecdc4;"></div>
-                    <span>🏖️ Playas</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #45b7d1;"></div>
-                    <span>🌋 Volcánico</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #96ceb4;"></div>
-                    <span>🎨 Arte/Cultura</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-color" style="background: #ffeaa7;"></div>
-                    <span>🍷 Gastronomía</span>
-                </div>
+                <button class="day-btn day-1" onclick="showDay(1)">Día 1: Llegada ✈️</button>
+                <button class="day-btn day-2" onclick="showDay(2)">Día 2: Joyas del Sur 🏖️</button>
+                <button class="day-btn day-3" onclick="showDay(3)">Día 3: Volcanes y Vino 🔥</button>
+                <button class="day-btn day-4" onclick="showDay(4)">Día 4: La Graciosa 🏝️</button>
+                <button class="day-btn day-5" onclick="showDay(5)">Día 5: Arte del Norte 🎨</button>
+                <button class="day-btn day-6" onclick="showDay(6)">Día 6: Despedida 👋</button>
             </div>
         </div>
         
@@ -224,69 +170,68 @@
         
         <div class="info-panel">
             <div class="day-info" id="info-1">
-                <h3>🌙 Día 1: Llegada y Asentamiento</h3>
+                <h3>🌙 Día 1: ¡Llegada y Noche en Playa Blanca!</h3>
                 <ul class="location-list">
-                    <li><span class="location-icon" style="background: #ff4444;"></span>Aeropuerto ACE → Playa Blanca (22:35h)</li>
-                    <li><span class="location-icon" style="background: #ff4444;"></span>Check-in en Calle La Fragata 20</li>
-                    <li><span class="location-icon" style="background: #ffeaa7;"></span>Cena rápida y descanso</li>
+                    <li>✈️ Aterrizaje en Aeropuerto de Lanzarote (ACE)</li>
+                    <li>🚗 Recogida del coche y viaje a Playa Blanca</li>
+                    <li>🏨 Check-in en Calle La Fragata 20 y a descansar</li>
                 </ul>
             </div>
             
             <div class="day-info" id="info-2">
-                <h3>🏖️ Día 2: Joyas del Sur</h3>
+                <h3>🏖️🌋 Día 2: Joyas del Sur: ¡Playas y Paisajes de Otro Mundo!</h3>
                 <ul class="location-list">
-                    <li><span class="location-icon" style="background: #4ecdc4;"></span>Playas del Papagayo (mañana)</li>
-                    <li><span class="location-icon" style="background: #4ecdc4;"></span>Playa Blanca céntrica</li>
-                    <li><span class="location-icon" style="background: #4ecdc4;"></span>Piscinas Naturales Los Charcones</li>
-                    <li><span class="location-icon" style="background: #45b7d1;"></span>El Golfo y Charco de los Clicos</li>
-                    <li><span class="location-icon" style="background: #45b7d1;"></span>Los Hervideros</li>
-                    <li><span class="location-icon" style="background: #45b7d1;"></span>Salinas de Janubio</li>
+                    <li>✨ Playas del Papagayo</li>
+                    <li>💦 Playa Blanca (la céntrica)</li>
+                    <li>🌊 Piscinas Naturales de Los Charcones</li>
+                    <li>⚫🟢 El Golfo y Charco de los Clicos (Lago Verde)</li>
+                    <li>🌊 Los Hervideros</li>
+                    <li>📸 Salinas de Janubio</li>
+                    <li>🐟 Cena en El Golfo o Playa Blanca</li>
                 </ul>
             </div>
             
             <div class="day-info" id="info-3">
-                <h3>🔥 Día 3: Corazón Volcánico y Cultura Rural</h3>
+                <h3>🔥🍷 Día 3: ¡El Corazón Volcánico, Cultura y Vinos!</h3>
                 <ul class="location-list">
-                    <li><span class="location-icon" style="background: #45b7d1;"></span>Parque Nacional Timanfaya (09:30h)</li>
-                    <li><span class="location-icon" style="background: #45b7d1;"></span>Paseo en camello (opcional)</li>
-                    <li><span class="location-icon" style="background: #ffeaa7;"></span>Almuerzo en Yaiza</li>
-                    <li><span class="location-icon" style="background: #96ceb4;"></span>Monumento al Campesino</li>
-                    <li><span class="location-icon" style="background: #45b7d1;"></span>Paisaje La Geria (sin cata)</li>
+                    <li>🔥 Montañas del Fuego (Parque Nacional de Timanfaya)</li>
+                    <li>🏘️👩‍🌾 Monumento y Casa-Museo del Campesino</li>
+                    <li>🌵🌸 Jardín de Cactus</li>
+                    <li>🍷 Bodega en La Geria (Cata de Vinos)</li>
                 </ul>
             </div>
-            
+
             <div class="day-info" id="info-4">
-                <h3>🎨 Día 4: Norte y Manrique</h3>
+                 <h3>🛥️🏝️ Día 4: ¡La Graciosa: Paraíso en E-Bike!</h3>
                 <ul class="location-list">
-                    <li><span class="location-icon" style="background: #96ceb4;"></span>Cueva de los Verdes (09:30h)</li>
-                    <li><span class="location-icon" style="background: #96ceb4;"></span>Jameos del Agua (11:30h)</li>
-                    <li><span class="location-icon" style="background: #4ecdc4;"></span>Playa La Garita, Arrieta</li>
-                    <li><span class="location-icon" style="background: #96ceb4;"></span>Mirador del Río (14:30h)</li>
-                    <li><span class="location-icon" style="background: #4ecdc4;"></span>Punta Mujeres</li>
-                    <li><span class="location-icon" style="background: #4ecdc4;"></span>Playa de Famara</li>
-                    <li><span class="location-icon" style="background: #ffeaa7;"></span>Cena Puerto del Carmen</li>
+                    <li>🚗💨 Viaje en coche a Órzola</li>
+                    <li>🛥️ Ferry a La Graciosa (Caleta del Sebo)</li>
+                    <li>🚲 Alquiler de E-Bikes e inicio de rutas</li>
+                    <li>🏝️ <strong>Ruta Sur:</strong> Playa Francesa y Playa de la Cocina</li>
+                    <li>🍽️ Almuerzo en Caleta del Sebo</li>
+                    <li>🏝️ <strong>Ruta Norte:</strong> Playa de Las Conchas</li>
+                    <li>🛥️ Regreso en Ferry a Órzola y vuelta a Playa Blanca</li>
                 </ul>
             </div>
             
             <div class="day-info" id="info-5">
-                <h3>🌵 Día 5: Arte Moderno y Capital</h3>
+                <h3>🎨🏙️ Día 5: El Genio de Manrique en el Norte y Capital</h3>
                 <ul class="location-list">
-                    <li><span class="location-icon" style="background: #96ceb4;"></span>Jardín de Cactus (10:00h)</li>
-                    <li><span class="location-icon" style="background: #4ecdc4;"></span>Playa Bastián (opcional)</li>
-                    <li><span class="location-icon" style="background: #96ceb4;"></span>Fundación César Manrique</li>
-                    <li><span class="location-icon" style="background: #96ceb4;"></span>Teguise (antigua capital)</li>
-                    <li><span class="location-icon" style="background: #96ceb4;"></span>Arrecife - Charco San Ginés</li>
-                    <li><span class="location-icon" style="background: #4ecdc4;"></span>Playa El Reducto</li>
+                    <li>🔦 Cueva de los Verdes</li>
+                    <li>🦀 Jameos del Agua</li>
+                    <li>🔭 Mirador del Río</li>
+                    <li>🏊‍♀️ Piscinas naturales de Punta Mujeres</li>
+                    <li>🌬️📸 Parada en Playa de Famara</li>
+                    <li>⛵ Paseo por Arrecife (Charco de San Ginés)</li>
                 </ul>
             </div>
             
             <div class="day-info" id="info-6">
-                <h3>👋 Día 6: Despedida</h3>
+                <h3>👋☀️ Día 6: ¡Despedida de Lanzarote!</h3>
                 <ul class="location-list">
-                    <li><span class="location-icon" style="background: #4ecdc4;"></span>Último baño en Playa Blanca</li>
-                    <li><span class="location-icon" style="background: #4ecdc4;"></span>Paseo marítimo</li>
-                    <li><span class="location-icon" style="background: #ffeaa7;"></span>Almuerzo Playa Honda</li>
-                    <li><span class="location-icon" style="background: #ff4444;"></span>Aeropuerto ACE (16:25h)</li>
+                    <li>🚶‍♀️🌴 Último paseo/baño en Playa Blanca</li>
+                    <li>🍔 Almuerzo cerca del aeropuerto (Playa Honda)</li>
+                    <li>🛫 Devolución del coche y vuelo de regreso (16:25h)</li>
                 </ul>
             </div>
         </div>
@@ -294,224 +239,217 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
     <script>
-        // Inicializar mapa centrado en Lanzarote
-        const map = L.map('map').setView([29.0469, -13.5904], 10);
+        const map = L.map('map').setView([29.0469, -13.5904], 9.5);
         
-        // Añadir capa de mapa
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap contributors, © CARTO'
         }).addTo(map);
 
-        // Coordenadas de las ubicaciones
         const locations = {
-            // Alojamiento y aeropuerto
-            aeropuerto: [28.9455, -13.6052],
-            alojamiento: [28.8628, -13.8273],
+            // Generales
+            aeropuerto: [28.952, -13.608],
+            alojamiento: [28.8615, -13.8291],
             
-            // Día 2 - Sur
-            papagayo: [28.8421, -13.8490],
-            playa_blanca: [28.8628, -13.8273],
-            charcones: [28.8850, -13.8380],
-            el_golfo: [28.9704, -13.8408],
-            charco_clicos: [28.9704, -13.8408],
-            hervideros: [28.9590, -13.8321],
-            salinas_janubio: [28.9320, -13.8100],
+            // Día 2
+            papagayo: [28.8415, -13.7885],
+            playa_blanca_centro: [28.861, -13.828],
+            charcones: [28.878, -13.844],
+            el_golfo: [28.976, -13.832],
+            hervideros: [28.950, -13.821],
+            salinas_janubio: [28.928, -13.818],
             
-            // Día 3 - Timanfaya
-            timanfaya: [29.0300, -13.7600],
-            la_geria: [29.0000, -13.6500],
-            
-            // Día 4 - Norte
-            cueva_verdes: [29.1580, -13.4420],
-            jameos_agua: [29.1588, -13.4325],
-            arrieta: [29.1455, -13.4633],
-            mirador_rio: [29.2258, -13.4708],
-            punta_mujeres: [29.1147, -13.4458],
-            famara: [29.1147, -13.5450],
-            puerto_carmen: [28.9247, -13.6669],
-            
-            // Día 5 - Arte y capital
-            jardin_cactus: [29.0974, -13.4644],
-            playa_bastian: [29.0588, -13.4988],
-            fundacion_manrique: [29.0361, -13.5472],
-            campesino: [29.0361, -13.5700],
-            teguise: [29.0606, -13.5619],
-            arrecife: [28.9636, -13.5475],
-            charco_san_gines: [28.9636, -13.5475],
-            playa_reducto: [28.9591, -13.5366]
+            // Día 3
+            timanfaya: [29.006, -13.753],
+            monumento_campesino: [29.030, -13.626],
+            jardin_cactus: [29.076, -13.480],
+            bodega_la_geria: [28.991, -13.689],
+
+            // Día 4
+            orzola: [29.222035167133843, -13.450325784074465],
+            caleta_sebo: [29.23093006458582, -13.50255534989619],
+            playa_francesa: [29.221862090449655, -13.530405440182516],
+            playa_cocina: [29.220908993487743, -13.543866552088497],
+            playa_las_conchas: [29.275700423650267, -13.515110479104552],
+
+            // Día 5
+            cueva_verdes: [29.161, -13.439],
+            jameos_agua: [29.155, -13.432],
+            mirador_rio: [29.215, -13.481],
+            punta_mujeres: [29.141, -13.455],
+            famara: [29.117, -13.551],
+            charco_san_gines: [28.962, -13.548],
+
+            // Día 6
+            playa_honda: [28.948, -13.585]
         };
 
-        // Definir rutas por día
+        // --- Rutas Trazadas Manualmente para La Graciosa ---
+        const rutaGraciosaSur = [
+            locations.caleta_sebo,
+            [29.228, -13.510],
+            [29.225, -13.520],
+            locations.playa_francesa,
+            [29.221, -13.537],
+            locations.playa_cocina
+        ];
+
+        const rutaGraciosaNorte = [
+            locations.caleta_sebo,
+            [29.240, -13.505],
+            [29.250, -13.508],
+            [29.265, -13.512],
+            locations.playa_las_conchas
+        ];
+
+
         const dayRoutes = {
             1: {
-                color: '#ff6b6b',
+                color: '#ff7675',
                 locations: ['aeropuerto', 'alojamiento'],
                 markers: [
-                    {coord: locations.aeropuerto, name: '✈️ Aeropuerto ACE', type: 'arrival'},
-                    {coord: locations.alojamiento, name: '🏨 Alojamiento Playa Blanca', type: 'hotel'}
+                    {coord: locations.aeropuerto, name: '✈️ Aeropuerto de Lanzarote (ACE)'},
+                    {coord: locations.alojamiento, name: '🏨 Alojamiento: Calle La Fragata'}
                 ]
             },
             2: {
-                color: '#4ecdc4',
-                locations: ['alojamiento', 'papagayo', 'playa_blanca', 'charcones', 'el_golfo', 'hervideros', 'salinas_janubio'],
+                color: '#74b9ff',
+                locations: ['alojamiento', 'papagayo', 'charcones', 'el_golfo', 'hervideros', 'salinas_janubio', 'alojamiento'],
                 markers: [
-                    {coord: locations.papagayo, name: '🏖️ Playas del Papagayo', type: 'beach'},
-                    {coord: locations.charcones, name: '🌊 Piscinas Los Charcones', type: 'beach'},
-                    {coord: locations.el_golfo, name: '🟢 El Golfo y Charco Clicos', type: 'volcanic'},
-                    {coord: locations.hervideros, name: '🌊 Los Hervideros', type: 'volcanic'},
-                    {coord: locations.salinas_janubio, name: '📸 Salinas de Janubio', type: 'volcanic'}
+                    {coord: locations.papagayo, name: '✨ Playas del Papagayo'},
+                    {coord: locations.playa_blanca_centro, name: '💦 Playa Blanca (Céntrica)'},
+                    {coord: locations.charcones, name: '🌊 Piscinas Naturales Los Charcones'},
+                    {coord: locations.el_golfo, name: '⚫🟢 El Golfo y Charco de los Clicos'},
+                    {coord: locations.hervideros, name: '🌊 Los Hervideros'},
+                    {coord: locations.salinas_janubio, name: '📸 Salinas de Janubio'}
                 ]
             },
             3: {
-                color: '#45b7d1',
-                locations: ['alojamiento', 'timanfaya', 'campesino', 'la_geria'],
+                color: '#fd79a8',
+                locations: ['alojamiento', 'timanfaya', 'monumento_campesino', 'bodega_la_geria', 'jardin_cactus', 'alojamiento'],
                 markers: [
-                    {coord: locations.timanfaya, name: '🔥 Parque Nacional Timanfaya', type: 'volcanic'},
-                    {coord: locations.campesino, name: '👨‍🌾 Monumento al Campesino', type: 'culture'},
-                    {coord: locations.la_geria, name: '📸 Paisaje La Geria (sin cata)', type: 'volcanic'}
+                    {coord: locations.timanfaya, name: '🔥 Parque Nacional de Timanfaya'},
+                    {coord: locations.monumento_campesino, name: '🏘️👩‍🌾 Monumento al Campesino'},
+                    {coord: locations.jardin_cactus, name: '🌵🌸 Jardín de Cactus'},
+                    {coord: locations.bodega_la_geria, name: '🍷 Bodega La Geria'}
                 ]
             },
-            4: {
-                color: '#96ceb4',
-                locations: ['alojamiento', 'cueva_verdes', 'jameos_agua', 'arrieta', 'mirador_rio', 'punta_mujeres', 'famara', 'puerto_carmen'],
+            4: { 
+                routes: [
+                    { 
+                        coords: [locations.alojamiento, locations.orzola],
+                        style: { color: '#81ecec', weight: 4, opacity: 0.8, dashArray: '10, 10' }
+                    },
+                    { 
+                        coords: rutaGraciosaSur,
+                        style: { color: '#55efc4', weight: 4, opacity: 0.9, dashArray: '5, 5' }
+                    },
+                    { 
+                        coords: rutaGraciosaNorte,
+                        style: { color: '#00b894', weight: 4, opacity: 0.9, dashArray: '5, 5' }
+                    }
+                ],
                 markers: [
-                    {coord: locations.cueva_verdes, name: '🔦 Cueva de los Verdes', type: 'culture'},
-                    {coord: locations.jameos_agua, name: '🦀 Jameos del Agua', type: 'culture'},
-                    {coord: locations.arrieta, name: '🏖️ Playa La Garita', type: 'beach'},
-                    {coord: locations.mirador_rio, name: '🔭 Mirador del Río', type: 'culture'},
-                    {coord: locations.punta_mujeres, name: '🏊‍♀️ Punta Mujeres', type: 'beach'},
-                    {coord: locations.famara, name: '🌬️ Playa de Famara', type: 'beach'},
-                    {coord: locations.puerto_carmen, name: '🍽️ Puerto del Carmen', type: 'food'}
+                    {coord: locations.orzola, name: '⛴️ Ferry desde Órzola'},
+                    {coord: locations.caleta_sebo, name: '🛥️ Caleta del Sebo (Base E-bikes)'},
+                    {coord: locations.playa_francesa, name: '🏖️ Playa Francesa'},
+                    {coord: locations.playa_cocina, name: '🌅 Playa de la Cocina'},
+                    {coord: locations.playa_las_conchas, name: '🐚 Playa de Las Conchas'}
                 ]
             },
             5: {
                 color: '#ffeaa7',
-                locations: ['alojamiento', 'jardin_cactus', 'playa_bastian', 'fundacion_manrique', 'teguise', 'arrecife'],
+                locations: ['alojamiento', 'cueva_verdes', 'jameos_agua', 'mirador_rio', 'punta_mujeres', 'famara', 'charco_san_gines', 'alojamiento'],
                 markers: [
-                    {coord: locations.jardin_cactus, name: '🌵 Jardín de Cactus', type: 'culture'},
-                    {coord: locations.playa_bastian, name: '⛱️ Playa Bastián', type: 'beach'},
-                    {coord: locations.fundacion_manrique, name: '🖼️ Fundación Manrique', type: 'culture'},
-                    {coord: locations.teguise, name: '🛍️ Teguise', type: 'culture'},
-                    {coord: locations.arrecife, name: '⛵ Arrecife - Charco San Ginés', type: 'culture'},
-                    {coord: locations.playa_reducto, name: '🏖️ Playa El Reducto', type: 'beach'}
+                    {coord: locations.cueva_verdes, name: '🔦 Cueva de los Verdes'},
+                    {coord: locations.jameos_agua, name: '🦀 Jameos del Agua'},
+                    {coord: locations.mirador_rio, name: '🔭 Mirador del Río'},
+                    {coord: locations.punta_mujeres, name: '🏊‍♀️ Punta Mujeres'},
+                    {coord: locations.famara, name: '🌬️📸 Playa de Famara'},
+                    {coord: locations.charco_san_gines, name: '⛵ Charco de San Ginés, Arrecife'}
                 ]
             },
             6: {
                 color: '#a29bfe',
-                locations: ['alojamiento', 'aeropuerto'],
+                locations: ['alojamiento', 'playa_honda', 'aeropuerto'],
                 markers: [
-                    {coord: locations.alojamiento, name: '👋 Último baño Playa Blanca', type: 'beach'},
-                    {coord: locations.aeropuerto, name: '✈️ Vuelo regreso 16:25h', type: 'departure'}
+                    {coord: locations.alojamiento, name: '🚶‍♀️🌴 Despedida de Playa Blanca'},
+                    {coord: locations.playa_honda, name: '🍔 Almuerzo en Playa Honda'},
+                    {coord: locations.aeropuerto, name: '🛫 Vuelo de Regreso'}
                 ]
             }
         };
 
-        // Variables para controlar capas
         let currentRouteLayer = null;
         let currentMarkersLayer = null;
-        let currentDay = null;
 
-        // Función para mostrar día
         function showDay(day) {
-            // Limpiar capas anteriores
-            if (currentRouteLayer) {
-                map.removeLayer(currentRouteLayer);
-            }
-            if (currentMarkersLayer) {
-                map.removeLayer(currentMarkersLayer);
-            }
-
-            // Actualizar botones
             document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`.day-btn.day-${day}`).classList.add('active');
+            document.querySelector(`.day-${day}`).classList.add('active');
 
-            // Mostrar info del día
             document.querySelectorAll('.day-info').forEach(info => info.classList.remove('active'));
             document.getElementById(`info-${day}`).classList.add('active');
 
-            const route = dayRoutes[day];
-            if (!route) return;
+            if (currentRouteLayer) map.removeLayer(currentRouteLayer);
+            if (currentMarkersLayer) map.removeLayer(currentMarkersLayer);
 
-            // Crear grupo de marcadores
+            const routeData = dayRoutes[day];
+            if (!routeData) return;
+            
+            // --- Marcadores ---
             currentMarkersLayer = L.layerGroup();
-
-            // Añadir marcadores
-            route.markers.forEach((marker, index) => {
-                const icon = getIcon(marker.type);
-                const mapMarker = L.marker(marker.coord, {icon: icon})
-                    .bindPopup(`<b>${marker.name}</b><br>Día ${day}`)
-                    .addTo(currentMarkersLayer);
+            const markerIcon = (html) => L.divIcon({
+                html: `<div style="font-size: 24px; text-shadow: 2px 2px 4px #00000080;">${html}</div>`,
+                className: '',
+                iconSize: [30, 30],
+                iconAnchor: [15, 30]
             });
-
-            // Crear ruta si hay más de un punto
-            if (route.locations.length > 1) {
-                const routeCoords = route.locations.map(loc => locations[loc]);
-                currentRouteLayer = L.polyline(routeCoords, {
-                    color: route.color,
-                    weight: 4,
-                    opacity: 0.8,
-                    dashArray: '10, 5'
-                }).addTo(map);
-            }
-
-            // Añadir marcadores al mapa
+            
+            routeData.markers.forEach(markerInfo => {
+                const emoji = markerInfo.name.match(/(\p{Emoji_Presentation}|\p{Emoji})/gu)?.[0] || '📍';
+                L.marker(markerInfo.coord, { icon: markerIcon(emoji) })
+                  .bindPopup(`<b>${markerInfo.name}</b>`)
+                  .addTo(currentMarkersLayer);
+            });
             currentMarkersLayer.addTo(map);
 
-            // Ajustar vista del mapa
-            if (route.markers.length > 0) {
-                const group = new L.featureGroup(route.markers.map(m => L.marker(m.coord)));
-                map.fitBounds(group.getBounds().pad(0.1));
+            // --- Rutas ---
+            currentRouteLayer = L.layerGroup(); 
+            
+            if (routeData.routes) { // Estructura especial para el Día 4
+                routeData.routes.forEach(route => {
+                    L.polyline(route.coords, route.style).addTo(currentRouteLayer);
+                });
+            } else if (routeData.locations) { // Estructura simple para otros días
+                 const routeCoords = routeData.locations.map(loc => locations[loc]);
+                 L.polyline(routeCoords, {
+                    color: routeData.color,
+                    weight: 4,
+                    opacity: 0.7,
+                    dashArray: '8, 8'
+                }).addTo(currentRouteLayer);
             }
+            currentRouteLayer.addTo(map);
 
-            currentDay = day;
+            // --- Ajuste del mapa ---
+            if (routeData.markers.length > 0) {
+                // Crear bounds basados en las coordenadas de los marcadores
+                const coords = routeData.markers.map(m => m.coord);
+                const bounds = L.latLngBounds(coords);
+                map.fitBounds(bounds.pad(0.1));
+            }
         }
-
-        // Función para obtener iconos personalizados
-        function getIcon(type) {
-            const iconColors = {
-                hotel: '#ff4444',
-                beach: '#4ecdc4',
-                volcanic: '#45b7d1',
-                culture: '#96ceb4',
-                wine: '#ffeaa7',
-                food: '#ffeaa7',
-                arrival: '#28a745',
-                departure: '#dc3545'
-            };
-
-            const iconSymbols = {
-                hotel: '🏨',
-                beach: '🏖️',
-                volcanic: '🌋',
-                culture: '🎨',
-                wine: '🍷',
-                food: '🍽️',
-                arrival: '✈️',
-                departure: '✈️'
-            };
-
-            return L.divIcon({
-                html: `<div style="background-color: ${iconColors[type]}; color: white; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3); font-size: 14px;">${iconSymbols[type]}</div>`,
-                iconSize: [30, 30],
-                iconAnchor: [15, 15],
-                className: 'custom-marker'
-            });
-        }
-
-        // Mostrar vista general al cargar
-        showDay(2); // Empezar con el día 2 que tiene más puntos
-
-        // Añadir marcador permanente del alojamiento
+        
+        // Marcador fijo del Alojamiento
         const hotelIcon = L.divIcon({
-            html: '<div style="background-color: #ff4444; color: white; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border: 3px solid white; box-shadow: 0 3px 8px rgba(0,0,0,0.4); font-size: 16px; z-index: 1000;">🏨</div>',
-            iconSize: [35, 35],
-            iconAnchor: [17, 17],
-            className: 'hotel-marker'
+            html: '<div style="font-size: 32px; filter: drop-shadow(3px 3px 3px #00000080)">🏠</div>',
+            className: '', iconSize: [35, 35], iconAnchor: [17, 35]
         });
+        L.marker(locations.alojamiento, { icon: hotelIcon, zIndexOffset: 1000 })
+          .bindPopup('<b>🏨 Tu Alojamiento</b><br>Calle La Fragata 20, Playa Blanca')
+          .addTo(map);
 
-        L.marker(locations.alojamiento, {icon: hotelIcon})
-            .bindPopup('<b>🏨 Tu Alojamiento</b><br>Calle La Fragata 20, Playa Blanca<br><em>Base de operaciones</em>')
-            .addTo(map);
+        // Carga inicial
+        showDay(1);
     </script>
 </body>
 </html>
